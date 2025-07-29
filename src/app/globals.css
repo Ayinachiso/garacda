@@ -1,0 +1,136 @@
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+@import "tailwindcss";
+
+/* =============================
+   🌈 CSS VARIABLES (Light Mode)
+============================= */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --dark-bg: #1a1a1a;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+
+  --primary: black;
+  --secondary: #4CAF50;
+
+  --text-primary: #131313;
+  --text-secondary: #343434;
+  --text-tertiary: #666666;
+  --text-light: #ffffff;
+  --text-special: #4CAF50;
+}
+
+/* =============================
+   🌙 Dark Mode Overrides
+============================= */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* =============================
+   📄 Base Styles
+============================= */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =============================
+   ✨ Custom Animations
+============================= */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-delay {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-delay-2 {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out;
+}
+
+.animate-fade-in-delay {
+  animation: fade-in-delay 1s ease-out 0.5s both;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fade-in-delay-2 1s ease-out 1s both;
+}
+
+/* =============================
+   🎯 Optional Fallback Utility
+   (only needed if Tailwind purge fails)
+============================= */
+@layer utilities {
+  .text-special {
+    color: var(--text-special);
+  }
+}
+
+/* =============================
+   🖱️ Custom Scrollbar
+============================= */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4CAF50;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #66bb6a;
+}
+
+/* =============================
+   🔍 Accessibility & UX
+============================= */
+html {
+  scroll-behavior: smooth;
+}
+
+*:focus {
+  outline: 2px solid #4CAF50;
+  outline-offset: 2px;
+}
+
+::selection {
+  background: #4CAF50;
+  color: white;
+}
