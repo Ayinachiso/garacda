@@ -1,78 +1,124 @@
-import { 
-  DollarSign, 
-  Shield, 
-  Users, 
-  Heart, 
-  Leaf, 
-  Bell 
-} from 'lucide-react';
+'use client';
 
-export default function Guidelines() {
-  const guidelines = [
-    {
-      id: 1,
-      icon: DollarSign,
-      title: '1. Prompt Payment of Bills',
-      description: 'Ensure timely payments to maintain services and support community initiatives.'
+import { motion } from 'framer-motion';
+import { ShieldCheck, Handshake, Trash2, Car } from 'lucide-react';
+import Image from 'next/image';
+
+const guidelines = [
+  {
+    icon: ShieldCheck,
+    title: 'Security & Safety First',
+    description: 'Adhere to all security protocols and report suspicious activity.',
+  },
+  {
+    icon: Handshake,
+    title: 'Prompt Payment of Dues',
+    description: 'Timely payment of dues is crucial for community maintenance.',
+  },
+  {
+    icon: Trash2,
+    title: 'Proper Waste Management',
+    description: 'Dispose of waste in designated areas and keep our community clean.',
+  },
+  {
+    icon: Car,
+    title: 'Responsible Parking',
+    description: 'Park in designated areas and respect parking regulations.',
+  },
+];
+
+const Guidelines = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
     },
-    {
-      id: 2,
-      icon: Shield,
-      title: '2. Safety First',
-      description: 'Report any suspicious activities and adhere to local laws.'
+  };
+
+  const itemVariants = {
+    hidden: { x: 20, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
     },
-    {
-      id: 3,
-      icon: Users,
-      title: '3. Engage and Participate',
-      description: 'Join community events and contribute to local discussions.'
+  };
+
+  const imageVariants = {
+    hidden: { scale: 0.9, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.7,
+      },
     },
-    {
-      id: 4,
-      icon: Heart,
-      title: '4. Help Your Neighbors',
-      description: 'Offer assistance and support to fellow residents.'
-    },
-    {
-      id: 5,
-      icon: Leaf,
-      title: '5. Keep Our Environment Clean',
-      description: 'Dispose of waste responsibly and keep our community tidy.'
-    },
-    {
-      id: 6,
-      icon: Bell,
-      title: '6. Stay Informed',
-      description: 'Keep up with community news and updates regularly.'
-    }
-  ];
+  };
 
   return (
-    <section id="guidelines" className="py-20 px-8 bg-dark text-text-light">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-text-light mb-4">Community Guidelines</h2>
-          <div className="w-24 h-1 bg-secondary mx-auto"></div>
+    <motion.section
+      id="guidelines"
+      className="py-24 bg-green-50"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-sans font-bold text-green-800 mb-2">
+            Living in Harmony
+          </h2>
+          <p className="text-lg font-body text-green-700">
+            A few guidelines to ensure a peaceful and orderly community.
+          </p>
         </div>
 
-        {/* Guidelines Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {guidelines.map((guideline, index) => (
-            <div
-              key={guideline.id}
-              className="bg-white/5 border border-white/10 rounded-lg p-8 text-center transition-all duration-300 hover:bg-white/15 hover:-translate-y-2 backdrop-blur-sm"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <guideline.icon size={32} className="text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-text-light mb-4">{guideline.title}</h3>
-              <p className="text-text-light/80 leading-relaxed">{guideline.description}</p>
-            </div>
-          ))}
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Guidelines List */}
+          <motion.div className="space-y-8" variants={containerVariants}>
+            {guidelines.map((guideline, index) => (
+              <motion.div
+                key={index}
+                className="flex items-start"
+                variants={itemVariants}
+              >
+                <div className="bg-green-800 text-white rounded-full p-3 mr-4">
+                  <guideline.icon size={24} />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-sans font-semibold text-green-800">
+                    {guideline.title}
+                  </h3>
+                  <p className="font-body text-green-700 mt-1">
+                    {guideline.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Image Section */}
+          <motion.div
+            className="relative h-96 rounded-lg overflow-hidden shadow-lg"
+            variants={imageVariants}
+          >
+            <Image
+              src="/images/road3.jpg"
+              alt="A clean and orderly street in the community"
+              layout="fill"
+              objectFit="cover"
+            />
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
-} 
+};
+
+export default Guidelines; 

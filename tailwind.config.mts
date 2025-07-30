@@ -9,37 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--text-primary)',
-        secondary: 'var(--text-secondary)',
-        special: 'var(--text-special)',
-        tertiary: 'var(--text-tertiary)',
-        light: 'var(--text-light)',
-        dark: {
-          DEFAULT: '#1A1A1A', // Dark Background
-        },
-        accent: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          950: '#172554',
+        primary: "#0D47A1", // Deep Blue
+        secondary: "#FFC107", // Amber
+        accent: "#4CAF50", // Green
+        neutral: {
+          light: "#F5F5F5", // Light Gray
+          DEFAULT: "#E0E0E0", // Gray
+          dark: "#212121", // Dark Gray
         },
         text: {
-          DEFAULT: '#333', // Text Color
+          DEFAULT: "#212121", // Dark Gray
           light: '#ffffff', // Light Text
-        },
+        }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
-        geist: ['var(--font-geist-sans)', 'sans-serif'],
-        'geist-mono': ['var(--font-geist-mono)', 'monospace'],
+        sans: ['var(--font-poppins)', 'sans-serif'],
+        body: ['var(--font-inter)', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

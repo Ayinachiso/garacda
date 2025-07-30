@@ -1,61 +1,117 @@
 'use client';
 
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Users, TrendingUp, Gem } from 'lucide-react';
 
-export default function About() {
+const About = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
+  const values = [
+    {
+      icon: Users,
+      title: 'Unity in Community',
+      description: 'We believe in the power of togetherness. Our community thrives on mutual respect, collaboration, and a shared sense of belonging.',
+    },
+    {
+      icon: TrendingUp,
+      title: 'Progress & Innovation',
+      description: 'We are committed to continuous improvement, embracing new ideas and technologies to enhance the lives of our residents.',
+    },
+    {
+      icon: Gem,
+      title: 'Quality of Life',
+      description: 'Our focus is on creating a safe, comfortable, and beautiful environment where every resident can flourish and feel at home.',
+    },
+  ];
+
   return (
-    <section id="about" className="py-20 px-6 bg-white text-gray-800">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-green-700 mb-3">
-            About Us
-          </h2>
-          <div className="w-20 h-1 bg-green-500 mx-auto rounded"></div>
-          <p className="text-gray-500 mt-4 max-w-xl mx-auto text-sm">
-            Discover the values that bring our community together
-          </p>
-        </div>
-
-        {/* About Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-green-600 mb-2">
-                A Shared Vision
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Gbemisola Adenubi CDA is a collaborative effort, uniting
-                residents of Gbemisola Adenubi Street and five adjoining streets
-                to work together for the betterment of our community.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-2xl font-semibold text-green-600 mb-2">
-                Empowering Our Neighbors
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                We believe in the power of community, fostering a sense of
-                belonging, responsibility, and collective action to create a
-                thriving environment for all.
-              </p>
-            </div>
-          </div>
-
-          {/* Image */}
-          <div className="relative group">
+    <motion.section
+      id="about"
+      className="py-24 bg-white"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <div className="container mx-auto px-4">
+        {/* Top Section: Welcome */}
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+          <motion.div variants={itemVariants}>
+            <h2 className="text-4xl font-sans font-bold text-[#0A4F0A] mb-4">
+              Welcome to Our Vibrant Community
+            </h2>
+            <p className="font-body text-lg text-neutral-dark mb-6">
+              Gbemisola Adenubi CDA is more than just a place to live; it's a thriving, welcoming community where neighbors become family. We are dedicated to creating a safe, beautiful, and connected environment for everyone.
+            </p>
+          </motion.div>
+          <motion.div className="relative h-80 rounded-lg overflow-hidden shadow-lg" variants={itemVariants}>
             <Image
-              src="/images/groupPhoto.jpg"
-              alt="Community Gathering"
-              width={600}
-              height={400}
-              className="rounded-xl shadow-xl object-cover w-full h-80 lg:h-96 transform transition-transform duration-300 group-hover:scale-105"
+              src="/images/house1.jpg"
+              alt="Beautiful house in the community"
+              layout="fill"
+              objectFit="cover"
+              className="transform hover:scale-105 transition-transform duration-300"
             />
-            <div className="absolute inset-0 rounded-xl bg-green-600/10 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition duration-300"></div>
-          </div>
+          </motion.div>
         </div>
+
+        {/* Bottom Section: Our Values */}
+        <motion.div variants={containerVariants}>
+          <motion.div className="text-center mb-12" variants={itemVariants}>
+            <h3 className="text-3xl font-sans font-bold text-primary mb-2">
+              Our Core Values
+            </h3>
+            <p className="text-lg font-body text-neutral-dark">
+              The principles that guide our community.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {values.map((value, index) => (
+              <motion.div
+                key={index}
+                className="bg-neutral-light p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 text-center"
+                variants={itemVariants}
+              >
+                <div className="flex justify-center mb-4">
+                  <div className="bg-primary text-white rounded-full p-4">
+                    <value.icon size={32} />
+                  </div>
+                </div>
+                <h4 className="text-2xl font-sans font-semibold text-primary mb-2">
+                  {value.title}
+                </h4>
+                <p className="font-body text-neutral-dark">
+                  {value.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
-}
+};
+
+export default About;
